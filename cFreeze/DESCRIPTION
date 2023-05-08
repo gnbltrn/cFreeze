@@ -1,0 +1,17 @@
+Package: cFreeze
+Title: No Freeze for Corn Planting
+Version: 1.0
+Authors@R: 
+    person("Gino", "Beltran", , "gbeltran@iastate.edu", role = c("aut", "cre"))
+Description: To understand the risk of chilling or freeze damage when
+    planting corn.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://github.com/gnbltrn/cFreeze
+LitrId: eca7f6111daff40dd2b591f34c501164
