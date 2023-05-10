@@ -1,10 +1,10 @@
 Package: cFreeze
-Title: No Freeze for Corn Planting
+Title: No Freeze for Corn Harvest
 Version: 1.0
 Authors@R: 
     person("Gino", "Beltran", , "gbeltran@iastate.edu", role = c("aut", "cre"))
 Description: To understand the risk of chilling or freeze damage when
-    planting corn.
+    harvesting corn.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,4 +16,4 @@ VignetteBuilder: knitr
 URL: https://github.com/gnbltrn/cFreeze/tree/main/cFreeze,
     https://gnbltrn.github.io/cFreeze/
 LitrVersionUsed: 0.8.0
-LitrId: 73c7b098f818487b34207191db531409
+LitrId: af7ad1b0c952ccbb9526c33da725e86f

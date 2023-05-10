@@ -368,8 +368,8 @@ of the R package.</p>
   fields = list(
     Package = params$package_name,
     Version = &quot;1.0&quot;,
-    Title = &quot;No Freeze for Corn Planting&quot;,
-    Description = &quot;To understand the risk of chilling or freeze damage when planting corn.&quot;,
+    Title = &quot;No Freeze for Corn Harvest&quot;,
+    Description = &quot;To understand the risk of chilling or freeze damage when harvesting corn.&quot;,
     `Authors@R` = person(&quot;Gino&quot;, &quot;Beltran&quot;, email = &quot;gbeltran@iastate.edu&quot;,
                          role = c(&quot;aut&quot;, &quot;cre&quot;)
       )
@@ -385,23 +385,265 @@ section</a>.</p>
 <div id="define-two-functions" class="section level3">
 <h3>Define two functions</h3>
 <p>Let’s define functions that say hello and hi:</p>
-<pre class="r"><code>#&#39; Say hello to someone
+<pre class="r"><code>#&#39; Plot Percent Days Below 0C 
 #&#39; 
-#&#39; @param name Name of a person
-#&#39; @param exclamation Whether to include an exclamation mark
+#&#39; Takes GPS coordinates, extracts last 30 years weather data from Iowa Environmental Mesonet (IEM) and returns a plot with the percent of days with minimum temperatures below 0C. Note Google maps provides lat, long in that order.  For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.  
+#&#39;
+#&#39; @param lon GPS longitude
+#&#39; @param lat GPS latitude 
 #&#39; @export 
-<span id='say_hello'>say_hello</span> &lt;- function(name, exclamation = TRUE) {
-  paste0(&quot;Hello &quot;, name, ifelse(exclamation, &quot;!&quot;, &quot;.&quot;))
+##Function 1. Plot pct days below 0C 
+<span id='plotdaysB0'>plotdaysB0</span> &lt;- function(lon, lat) {
+
+  library(apsimx)
+  library(ggplot2)
+  library(lubridate)
+  library(tidyverse)
+  
+##Downloading and Saving whether data from IEM
+##Read 30 years IEM weather data
+cFreezedata &lt;- get_iem_apsim_met(lonlat = c(lon, lat), 
+                                 dates = c(&quot;1993-01-01&quot;, &quot;2022-12-31&quot;))
+
+##Calculate percent days with freeze (below 0C)
+pctcal &lt;- lapply(split(cFreezedata, cFreezedata$day), function(x){
+  data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint &lt;= 0])/length(x$mint))
+})
+
+##Apply rbind to create a single data frame from the list above
+pctdf &lt;- do.call(rbind, pctcal)
+
+##Add date, month and mday
+pctdfmd &lt;- pctdf %&gt;% 
+          mutate(date = doy2date(day)) %&gt;%
+          mutate(month = month(date)) %&gt;%
+          mutate(mday = day(date))
+          
+##Add month-day format character
+pctdfmdmd &lt;- pctdfmd %&gt;%
+    mutate(monthabb = month.abb[pctdfmd$month]) %&gt;%
+    unite(monthday, monthabb, mday, remove = FALSE, sep = &quot;-&quot;) %&gt;%
+    filter(day != 366)
+
+##Ploting
+plotB0 &lt;- ggplot(pctdfmdmd)+
+  geom_line(aes(x = date, y = pct)) +
+  scale_x_date(date_labels = &quot;%b-%d&quot;, 
+               date_breaks = &quot;2 month&quot;)
+
+return(plotB0)
 }
 
-#&#39; Say hi to someone
+
+
+
+#&#39; Last Day To Harvest With No Historical Freeze
 #&#39; 
-#&#39; @param name Name of a person
-#&#39; @param exclamation Whether to include an exclamation mark
-#&#39; @export 
-<span id='say_hi'>say_hi</span> &lt;- function(name, exclamation = TRUE) {
-  paste0(&quot;Hi &quot;, name, ifelse(exclamation, &quot;!&quot;, &quot;.&quot;))
-}</code></pre>
+#&#39; Returns the last day to harvest with no history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#&#39; 
+#&#39; @param lon GPS longitude
+#&#39; @param lat GPS latitude 
+#&#39; @export
+##Function 2. Find the last day to harvest with no Freeze
+<span id='nofreeze'>nofreeze</span> &lt;- function(lon, lat) {
+
+##load libraries    
+library(apsimx)
+library(ggplot2)
+library(lubridate)
+library(tidyverse)
+
+##Downloading and Saving whether data from IEM
+##Read 30 years IEM weather data
+cFreezedata &lt;- get_iem_apsim_met(lonlat = c(lon, lat), 
+                                 dates = c(&quot;1993-01-01&quot;, &quot;2022-12-31&quot;))
+
+##Calculate percent days with freeze (below 0C)
+pctcal &lt;- lapply(split(cFreezedata, cFreezedata$day), function(x){
+  data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint &lt;= 0])/length(x$mint))
+})
+
+##Apply rbind to create a single data frame from the list above
+pctdf &lt;- do.call(rbind, pctcal)
+
+##Add date, month and mday
+pctdfmd &lt;- pctdf %&gt;% 
+  mutate(date = doy2date(day)) %&gt;%
+  mutate(month = month(date)) %&gt;%
+  mutate(mday = day(date))
+
+##Add month-day format character
+pctdfmdmd &lt;- pctdfmd %&gt;%
+  mutate(monthabb = month.abb[pctdfmd$month]) %&gt;%
+  unite(monthday, monthabb, mday, remove = FALSE, sep = &quot;-&quot;) %&gt;%
+  filter(day != 366)
+  
+##Find the last day to harvest
+pctnon0 &lt;- pctdfmdmd %&gt;%
+  filter(month &gt; 6) %&gt;%
+  filter(pct &gt; 0)
+  
+return(pctnon0[1,5])
+  
+}
+  
+
+#&#39; Last Day To Harvest With 10pct Historical Freeze
+#&#39; 
+#&#39; Returns the last day to harvest with 10pct history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#&#39; 
+#&#39; @param lon GPS longitude
+#&#39; @param lat GPS latitude 
+#&#39; @export
+
+##Function 3. Find the last day to harvest with 10pct chance Freeze
+<span id='freeze10'>freeze10</span> &lt;- function(lon, lat) {
+  
+  ##load libraries    
+  library(apsimx)
+  library(ggplot2)
+  library(lubridate)
+  library(tidyverse)
+  
+  ##Downloading and Saving whether data from IEM
+  ##Read 30 years IEM weather data
+  cFreezedata &lt;- get_iem_apsim_met(lonlat = c(lon, lat), 
+                                   dates = c(&quot;1993-01-01&quot;, &quot;2022-12-31&quot;))
+  
+  ##Calculate percent days with freeze (below 0C)
+  pctcal &lt;- lapply(split(cFreezedata, cFreezedata$day), function(x){
+    data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint &lt;= 0])/length(x$mint))
+  })
+  
+  ##Apply rbind to create a single data frame from the list above
+  pctdf &lt;- do.call(rbind, pctcal)
+  
+  ##Add date, month and mday
+  pctdfmd &lt;- pctdf %&gt;% 
+    mutate(date = doy2date(day)) %&gt;%
+    mutate(month = month(date)) %&gt;%
+    mutate(mday = day(date))
+  
+  ##Add month-day format character
+  pctdfmdmd &lt;- pctdfmd %&gt;%
+    mutate(monthabb = month.abb[pctdfmd$month]) %&gt;%
+    unite(monthday, monthabb, mday, remove = FALSE, sep = &quot;-&quot;) %&gt;%
+    filter(day != 366)
+  
+  ##Find the last day to harvest
+  pct10 &lt;- pctdfmdmd %&gt;%
+    filter(month &gt; 6) %&gt;%
+    filter(pct &gt; 10)
+  
+  return(pct10[1,5])
+  
+}
+
+
+#&#39; Last Day To Harvest With 20pct Historical Freeze
+#&#39; 
+#&#39; Returns the last day to harvest with 20pct history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#&#39; 
+#&#39; @param lon GPS longitude
+#&#39; @param lat GPS latitude 
+#&#39; @export
+##Function 4. Find the last day to harvest with 20pct chance Freeze
+<span id='freeze20'>freeze20</span> &lt;- function(lon, lat) {
+  
+  ##load libraries    
+  library(apsimx)
+  library(ggplot2)
+  library(lubridate)
+  library(tidyverse)
+  
+  ##Downloading and Saving whether data from IEM
+  ##Read 30 years IEM weather data
+  cFreezedata &lt;- get_iem_apsim_met(lonlat = c(lon, lat), 
+                                   dates = c(&quot;1993-01-01&quot;, &quot;2022-12-31&quot;))
+  
+  ##Calculate percent days with freeze (below 0C)
+  pctcal &lt;- lapply(split(cFreezedata, cFreezedata$day), function(x){
+    data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint &lt;= 0])/length(x$mint))
+  })
+  
+  ##Apply rbind to create a single data frame from the list above
+  pctdf &lt;- do.call(rbind, pctcal)
+  
+  ##Add date, month and mday
+  pctdfmd &lt;- pctdf %&gt;% 
+    mutate(date = doy2date(day)) %&gt;%
+    mutate(month = month(date)) %&gt;%
+    mutate(mday = day(date))
+  
+  ##Add month-day format character
+  pctdfmdmd &lt;- pctdfmd %&gt;%
+    mutate(monthabb = month.abb[pctdfmd$month]) %&gt;%
+    unite(monthday, monthabb, mday, remove = FALSE, sep = &quot;-&quot;) %&gt;%
+    filter(day != 366)
+  
+  ##Find the last day to harvest
+  pct20 &lt;- pctdfmdmd %&gt;%
+    filter(month &gt; 6) %&gt;%
+    filter(pct &gt; 20)
+  
+  return(pct20[1,5])
+  
+}
+
+
+#&#39; Find the Percent Historical Freeze For Any Given Month and Day
+#&#39; 
+#&#39; Returns the percent of days with freezing temperatures in the last years, based on GPS coordinates and weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#&#39; 
+#&#39; @param lon GPS longitude
+#&#39; @param lat GPS latitude
+#&#39; @param Month numeric values 1:12
+#&#39; @param Mday numeric values 1:31 for a given month, excluding Feb-29
+#&#39;   
+#&#39; @export
+##Function 5. Find the pct freeze for any date in Month-Day format
+<span id='freeze'>freeze</span> &lt;- function(lon, lat, Month, Mday) {
+  
+  ##load libraries    
+  library(apsimx)
+  library(ggplot2)
+  library(lubridate)
+  library(tidyverse)
+  
+  ##Downloading and Saving whether data from IEM
+  ##Read 30 years IEM weather data
+  cFreezedata &lt;- get_iem_apsim_met(lonlat = c(lon, lat), 
+                                   dates = c(&quot;1993-01-01&quot;, &quot;2022-12-31&quot;))
+  
+  ##Calculate percent days with freeze (below 0C)
+  pctcal &lt;- lapply(split(cFreezedata, cFreezedata$day), function(x){
+    data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint &lt;= 0])/length(x$mint))
+  })
+  
+  ##Apply rbind to create a single data frame from the list above
+  pctdf &lt;- do.call(rbind, pctcal)
+  
+  ##Add date, month and mday
+  pctdfmd &lt;- pctdf %&gt;% 
+    mutate(date = doy2date(day)) %&gt;%
+    mutate(month = month(date)) %&gt;%
+    mutate(mday = day(date))
+  
+  ##Add month-day format character
+  pctdfmdmd &lt;- pctdfmd %&gt;%
+    mutate(monthabb = month.abb[pctdfmd$month]) %&gt;%
+    unite(monthday, monthabb, mday, remove = FALSE, sep = &quot;-&quot;) %&gt;%
+    filter(day != 366)
+  
+  ##Find the last day to harvest
+  pctany &lt;- pctdfmdmd %&gt;%
+    filter(month == Month) %&gt;%
+    filter(mday == Mday)
+
+  return(pctany$pct)
+}
+
+</code></pre>
 </div>
 </div>
 <div id="document-the-package" class="section level2">
@@ -411,8 +653,11 @@ section</a>.</p>
 <pre><code>## ℹ Updating cFreeze documentation
 ## ℹ Loading cFreeze
 ## Writing &#39;NAMESPACE&#39;
-## Writing &#39;say_hello.Rd&#39;
-## Writing &#39;say_hi.Rd&#39;</code></pre>
+## Writing &#39;plotdaysB0.Rd&#39;
+## Writing &#39;nofreeze.Rd&#39;
+## Writing &#39;freeze10.Rd&#39;
+## Writing &#39;freeze20.Rd&#39;
+## Writing &#39;freeze.Rd&#39;</code></pre>
 </div>
 <div id="extra" class="section level2">
 <h2>Add extra items</h2>
@@ -473,7 +718,6 @@ that we can have a link to it on our pkgdown site.</p>
 ## ✔ Adding &#39;docs&#39; to &#39;.gitignore&#39;
 ## ✔ Writing &#39;_pkgdown.yml&#39;
 ## • Edit &#39;_pkgdown.yml&#39;
-## ✔ Initializing empty, orphan &#39;gh-pages&#39; branch in GitHub repo &#39;gnbltrn/cFreeze&#39;
 ## ✔ GitHub Pages is publishing from:
 ## • URL: &#39;https://gnbltrn.github.io/cFreeze/&#39;
 ## • Branch: &#39;gh-pages&#39;
@@ -485,8 +729,7 @@ that we can have a link to it on our pkgdown site.</p>
 ## ✔ Saving &#39;r-lib/actions/examples/pkgdown.yaml@v2&#39; to &#39;.github/workflows/pkgdown.yaml&#39;
 ## • Learn more at &lt;https://github.com/r-lib/actions/blob/v2/examples/README.md&gt;.
 ## ✔ Recording &#39;https://gnbltrn.github.io/cFreeze/&#39; as site&#39;s url in &#39;_pkgdown.yml&#39;
-## ✔ Adding &#39;https://gnbltrn.github.io/cFreeze/&#39; to URL field in DESCRIPTION
-## ✔ Setting &#39;https://gnbltrn.github.io/cFreeze/&#39; as homepage of GitHub repo &#39;gnbltrn/cFreeze&#39;</code></pre>
+## ✔ Adding &#39;https://gnbltrn.github.io/cFreeze/&#39; to URL field in DESCRIPTION</code></pre>
 <p>You can call <code>add_pkgdown()</code> without the argument;
 however, here we are providing a customized _pkgdown.yml file. See <a href="https://pkgdown.r-lib.org/articles/customise.html">this
 <code>pkgdown</code> vignette</a> for how to customize your site. Here
