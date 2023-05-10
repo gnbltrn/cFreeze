@@ -14,17 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cFreeze  <img src="man/figures/logo.png" align="right" height="139" />
+## cFreeze  <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 <!-- badges: end --> 
 
-The purpose of cFreeze is help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM). 
+The purpose of cFreeze is to help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM) closest to that location. 
 
 To learn more about IEM, follow this link:
 https://mesonet.agron.iastate.edu/
 
-#Requirements
+## Requirements
 
 The following package needs to be installed and loaded for cFreeze to work successfully.
 
@@ -34,7 +34,7 @@ library(apsimx)
 ```
 
 
-#Instalation
+## Instalation
 cFreeze can be installed directly from its GitHub public repository using the devtools package:
 
 ```{r}
