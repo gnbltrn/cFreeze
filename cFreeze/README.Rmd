@@ -14,14 +14,39 @@ knitr::opts_chunk$set(
 )
 ```
 
-# withpkgdown: An Example Package <img src="man/figures/logo.png" align="right" height="139" />
+# cFreeze  <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
-<!-- badges: end -->
+<!-- badges: end --> 
 
-This package's purpose is to show how to use [litr](https://github.com/jacobbien/litr-project/tree/main/litr) to create a package with a README, a vignette, a pkgdown site, and (of course) a hex sticker.  We can see the result of all of that at this package's website [here](https://jacobbien.github.io/withpkgdown-project/).
+The purpose of cFreeze is help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM). 
 
-## Getting started
+To learn more about IEM, follow this link:
+https://mesonet.agron.iastate.edu/
+
+#Requirements
+
+The following package needs to be installed and loaded for cFreeze to work successfully.
+
+```{r}
+install.packages("apsimx")
+library(apsimx)
+```
+
+
+#Instalation
+cFreeze can be installed directly from its GitHub public repository using the devtools package:
+
+```{r}
+
+install.packages("devtools")  #if not installed yet
+devtools::install.github("gnbltrn/cFreeze/cFreeze")
+
+#Load cFreeze
+library(cFreeze)
+```
+
+## Basic Demonstration of Funtionality
 
 Put instructions here for how to install your package:
 
