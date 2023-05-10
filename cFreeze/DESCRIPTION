@@ -3,8 +3,7 @@ Title: No Freeze for Corn Harvest
 Version: 1.0
 Authors@R: 
     person("Gino", "Beltran", , "gbeltran@iastate.edu", role = c("aut", "cre"))
-Description: To understand the risk of chilling or freeze damage when
-    harvesting corn.
+Description: To understand the risk of freeze damage when harvesting corn.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,4 +15,4 @@ VignetteBuilder: knitr
 URL: https://github.com/gnbltrn/cFreeze/tree/main/cFreeze,
     https://gnbltrn.github.io/cFreeze/
 LitrVersionUsed: 0.8.0
-LitrId: af7ad1b0c952ccbb9526c33da725e86f
+LitrId: 72338d0eeea4634338c7808165fbb17e

@@ -23,7 +23,7 @@ usethis::create_package(
     Package = params$package_name,
     Version = "1.0",
     Title = "No Freeze for Corn Harvest",
-    Description = "To understand the risk of chilling or freeze damage when harvesting corn.",
+    Description = "To understand the risk of freeze damage when harvesting corn.",
     `Authors@R` = person("Gino", "Beltran", email = "gbeltran@iastate.edu",
                          role = c("aut", "cre")
       )
@@ -36,7 +36,7 @@ usethis::use_mit_license(copyright_holder = "cFreeze authors")
 
 This section is nearly identical to the `rhello` template.  The real purpose of this template starts in [this section](#extra).
 
-### Define two functions
+### Define functions
 
 Let's define functions that say hello and hi:
 
