@@ -16,5 +16,5 @@ freeze(lon, lat, Month, Mday)
 \item{Mday}{numeric values 1:31 for a given month, excluding Feb-29}
 }
 \description{
-Returns the percent of days with freezing temperatures in the last years, based on GPS coordinates and weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+Returns the historical percent of days with freezing temperatures for any day of the year, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 }

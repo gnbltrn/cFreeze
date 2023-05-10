@@ -12,5 +12,5 @@ plotdaysB0(lon, lat)
 \item{lat}{GPS latitude}
 }
 \description{
-Takes GPS coordinates, extracts last 30 years weather data from Iowa Environmental Mesonet (IEM) and returns a plot with the percent of days with minimum temperatures below 0C. Note Google maps provides lat, long in that order.  For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+Returns a plot with the historical percent of days with temperatures below 0C for each day of the year, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 }

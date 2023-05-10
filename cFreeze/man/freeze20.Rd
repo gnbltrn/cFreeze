@@ -12,5 +12,5 @@ freeze20(lon, lat)
 \item{lat}{GPS latitude}
 }
 \description{
-Returns the last day to harvest with 20pct history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+Returns the last day to harvest with up to 20pct history of freezing temperatures, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 }

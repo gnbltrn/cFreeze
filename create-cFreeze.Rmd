@@ -43,7 +43,7 @@ Let's define functions that say hello and hi:
 ```{r}
 #' Plot Percent Days Below 0C 
 #' 
-#' Takes GPS coordinates, extracts last 30 years weather data from Iowa Environmental Mesonet (IEM) and returns a plot with the percent of days with minimum temperatures below 0C. Note Google maps provides lat, long in that order.  For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.  
+#'Returns a plot with the historical percent of days with temperatures below 0C for each day of the year, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 #'
 #' @param lon GPS longitude
 #' @param lat GPS latitude 
@@ -95,7 +95,7 @@ return(plotB0)
 
 #' Last Day To Harvest With No Historical Freeze
 #' 
-#' Returns the last day to harvest with no history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#' Returns the last day to harvest with no history of freezing temperatures, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 #' 
 #' @param lon GPS longitude
 #' @param lat GPS latitude 
@@ -146,7 +146,7 @@ return(pctnon0[1,5])
 
 #' Last Day To Harvest With 10pct Historical Freeze
 #' 
-#' Returns the last day to harvest with 10pct history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#' Returns the last day to harvest with up to 10pct history of freezing temperatures, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 #' 
 #' @param lon GPS longitude
 #' @param lat GPS latitude 
@@ -198,7 +198,7 @@ freeze10 <- function(lon, lat) {
 
 #' Last Day To Harvest With 20pct Historical Freeze
 #' 
-#' Returns the last day to harvest with 20pct history of freezing temperatures, based on GPS coordinates the and last 30 years weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#' Returns the last day to harvest with up to 20pct history of freezing temperatures, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 #' 
 #' @param lon GPS longitude
 #' @param lat GPS latitude 
@@ -249,7 +249,7 @@ freeze20 <- function(lon, lat) {
 
 #' Find the Percent Historical Freeze For Any Given Month and Day
 #' 
-#' Returns the percent of days with freezing temperatures in the last years, based on GPS coordinates and weather data from Iowa Environmental Mesonet (IEM). Note Google maps provides lat, long in that order. For this package you need to enter long, lat in that order. You must have packages apsimx and tidyverse installed.
+#' Returns the historical percent of days with freezing temperatures for any day of the year, based on GPS coordinates and 30-year weather data from Iowa Environmental Mesonet (IEM). For this package you need to enter long, lat in that order. Note other applications, such as Google maps, provide lat, long in the reverse order.  You must have the apsimx package installed.
 #' 
 #' @param lon GPS longitude
 #' @param lat GPS latitude
