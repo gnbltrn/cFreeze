@@ -351,13 +351,15 @@ usethis:::use_description_field(
   "URL",
   "https://github.com/gnbltrn/cFreeze/tree/main/cFreeze"
 )
+
+
 ```
 
 Be sure that this next command appears after `litr::document()` has been called in this file.
 
 ```{r}
-usethis::use_pkgdown_github_pages()
-##litr::add_pkgdown("../source-files/_pkgdown.yml")
+#litr::add_pkgdown(config_path = NULL)
+litr::add_pkgdown("../source-files/_pkgdown.yml")
 ```
 
 You can call `add_pkgdown()` without the argument; however, here we are providing a customized _pkgdown.yml file.  See [this `pkgdown` vignette](https://pkgdown.r-lib.org/articles/customise.html) for how to customize your site.  Here is the contents of the `_pkgdown.yml` that was used:

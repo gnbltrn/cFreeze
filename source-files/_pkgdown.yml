@@ -1,10 +1,7 @@
-destination: ../docs/
+  url: https://gnbltrn.github.io/cFreeze_Package/
+  template:
+    bootstrap: 5
 
-url: ~
-template:
-  bootstrap: 5
 
-navbar:
-  structure:
-    left:  [reference, articles, search]
-    right: [github]
+
+

@@ -1,4 +1,7 @@
-url: https://gnbltrn.github.io/cFreeze/
-template:
-  bootstrap: 5
+  url: https://gnbltrn.github.io/cFreeze_Package/
+  template:
+    bootstrap: 5
+
+
+
 

@@ -1,7 +1,5 @@
 ---
-title: "Using withpkgdown Package"
-author: "Your Name"
-date: "`r Sys.Date()`"
+title: "Using cFreeze Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using withpkgdown Package}
@@ -9,10 +7,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette describes how to use this package.  You start by loading the package.
+This vignette describes how to use cFreeze package.  You start by loading the package.
 
 ```{r}
-library(withpkgdown)
+library(cFreeze)
 ```
 
 ### Saying hello
@@ -22,7 +20,7 @@ To say hello, you use the `say_hello()` function:
 For example, to say hello to someone named Jacob, you'd do the following:
 
 ```{r}
-say_hello("Jacob")
+
 ```
 
 ### Saying hi
@@ -30,7 +28,7 @@ say_hello("Jacob")
 To say hi to someone, one would use the following:
 
 ```{r}
-say_hi("Jacob")
+
 ```
 
 ### More advanced use
@@ -38,6 +36,6 @@ say_hi("Jacob")
 You can control the punctuation by using the `exclamation` argument:
 
 ```{r}
-say_hello("Jacob", exclamation=FALSE)
+
 ```
 

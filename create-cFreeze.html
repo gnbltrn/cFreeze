@@ -707,44 +707,74 @@ that we can have a link to it on our pkgdown site.</p>
 <pre class="r"><code>usethis:::use_description_field(
   &quot;URL&quot;,
   &quot;https://github.com/gnbltrn/cFreeze/tree/main/cFreeze&quot;
-)</code></pre>
+)
+
+</code></pre>
 <pre><code>## ✔ Setting URL field in DESCRIPTION to
 ## &#39;https://github.com/gnbltrn/cFreeze/tree/main/cFreeze&#39;</code></pre>
 <p>Be sure that this next command appears after
 <code>litr::document()</code> has been called in this file.</p>
-<pre class="r"><code>usethis::use_pkgdown_github_pages()
-##litr::add_pkgdown(&quot;../source-files/_pkgdown.yml&quot;)</code></pre>
-<pre><code>## ✔ Adding &#39;^_pkgdown\\.yml$&#39;, &#39;^docs$&#39;, &#39;^pkgdown$&#39; to &#39;.Rbuildignore&#39;
-## ✔ Adding &#39;docs&#39; to &#39;.gitignore&#39;
-## ✔ Writing &#39;_pkgdown.yml&#39;
-## • Edit &#39;_pkgdown.yml&#39;
-## ✔ GitHub Pages is publishing from:
-## • URL: &#39;https://gnbltrn.github.io/cFreeze/&#39;
-## • Branch: &#39;gh-pages&#39;
-## • Path: &#39;/&#39;
-## ✔ Creating &#39;.github/&#39;
-## ✔ Adding &#39;^\\.github$&#39; to &#39;.Rbuildignore&#39;
-## ✔ Adding &#39;*.html&#39; to &#39;.github/.gitignore&#39;
-## ✔ Creating &#39;.github/workflows/&#39;
-## ✔ Saving &#39;r-lib/actions/examples/pkgdown.yaml@v2&#39; to &#39;.github/workflows/pkgdown.yaml&#39;
-## • Learn more at &lt;https://github.com/r-lib/actions/blob/v2/examples/README.md&gt;.
-## ✔ Recording &#39;https://gnbltrn.github.io/cFreeze/&#39; as site&#39;s url in &#39;_pkgdown.yml&#39;
-## ✔ Adding &#39;https://gnbltrn.github.io/cFreeze/&#39; to URL field in DESCRIPTION</code></pre>
+<pre class="r"><code>#litr::add_pkgdown(config_path = NULL)
+litr::add_pkgdown(&quot;../source-files/_pkgdown.yml&quot;)</code></pre>
+<pre><code>## ✔ Adding &#39;^_pkgdown\\.yml$&#39;, &#39;^docs$&#39;, &#39;^pkgdown$&#39; to &#39;.Rbuildignore&#39;</code></pre>
+<pre><code>## -- Installing package into temporary library -----------------------------------</code></pre>
+<pre><code>## Warning: package &#39;cFreeze&#39; is in use and will not be installed</code></pre>
+<pre><code>## == Building pkgdown site =======================================================
+## Reading from: &#39;C:/Users/GB/Desktop/ISU.CropProd&amp;Phys/Courses/STAT585.DataTechnologies/Blogs/cFreeze/cFreeze&#39;
+## Writing to:   &#39;C:/Users/GB/Desktop/ISU.CropProd&amp;Phys/Courses/STAT585.DataTechnologies/Blogs/cFreeze/cFreeze/docs&#39;
+## -- Initialising site -----------------------------------------------------------
+## Copying &#39;../../../../../../../AppData/Local/R/win-library/4.2/pkgdown/BS5/assets/link.svg&#39; to &#39;link.svg&#39;
+## Copying &#39;../../../../../../../AppData/Local/R/win-library/4.2/pkgdown/BS5/assets/pkgdown.js&#39; to &#39;pkgdown.js&#39;
+## -- Building favicons -----------------------------------------------------------
+## Building favicons with realfavicongenerator.net...
+## Copying &#39;pkgdown/favicon/apple-touch-icon-120x120.png&#39; to &#39;apple-touch-icon-120x120.png&#39;
+## Copying &#39;pkgdown/favicon/apple-touch-icon-152x152.png&#39; to &#39;apple-touch-icon-152x152.png&#39;
+## Copying &#39;pkgdown/favicon/apple-touch-icon-180x180.png&#39; to &#39;apple-touch-icon-180x180.png&#39;
+## Copying &#39;pkgdown/favicon/apple-touch-icon-60x60.png&#39; to &#39;apple-touch-icon-60x60.png&#39;
+## Copying &#39;pkgdown/favicon/apple-touch-icon-76x76.png&#39; to &#39;apple-touch-icon-76x76.png&#39;
+## Copying &#39;pkgdown/favicon/apple-touch-icon.png&#39; to &#39;apple-touch-icon.png&#39;
+## Copying &#39;pkgdown/favicon/favicon-16x16.png&#39; to &#39;favicon-16x16.png&#39;
+## Copying &#39;pkgdown/favicon/favicon-32x32.png&#39; to &#39;favicon-32x32.png&#39;
+## Copying &#39;pkgdown/favicon/favicon.ico&#39; to &#39;favicon.ico&#39;
+## Copying &#39;man/figures/logo.png&#39; to &#39;logo.png&#39;
+## -- Building home ---------------------------------------------------------------
+## Writing &#39;authors.html&#39;
+## Reading &#39;LICENSE.md&#39;
+## Writing &#39;LICENSE.html&#39;
+## Writing &#39;LICENSE-text.html&#39;
+## Copying &#39;man/figures/logo.png&#39; to &#39;reference/figures/logo.png&#39;
+## Writing &#39;404.html&#39;
+## -- Building function reference -------------------------------------------------
+## Writing &#39;reference/index.html&#39;
+## Reading &#39;man/freeze.Rd&#39;
+## Writing &#39;reference/freeze.html&#39;
+## Reading &#39;man/freeze10.Rd&#39;
+## Writing &#39;reference/freeze10.html&#39;
+## Reading &#39;man/freeze20.Rd&#39;
+## Writing &#39;reference/freeze20.html&#39;
+## Reading &#39;man/nofreeze.Rd&#39;
+## Writing &#39;reference/nofreeze.html&#39;
+## Reading &#39;man/plotdaysB0.Rd&#39;
+## Writing &#39;reference/plotdaysB0.html&#39;
+## -- Building articles -----------------------------------------------------------
+## Writing &#39;articles/index.html&#39;
+## Reading &#39;vignettes/using-package.Rmd&#39;
+## Writing &#39;articles/using-package.html&#39;
+## Writing &#39;sitemap.xml&#39;
+## -- Building search index -------------------------------------------------------
+## == DONE ========================================================================
+## Warning messages:
+## 1: Missing images in &#39;README.md&#39;: &#39;reference/figures/plotB0.png&#39;
+## ℹ pkgdown can only use images in &#39;man/figures&#39; and &#39;vignettes&#39; 
+## 2: The vignette title specified in \VignetteIndexEntry{} is different from the title in the YAML metadata. The former is &quot;Using withpkgdown Package&quot;, and the latter is &quot;Using cFreeze Package&quot;. If that is intentional, you may set options(rmarkdown.html_vignette.check_title = FALSE) to suppress this check. </code></pre>
 <p>You can call <code>add_pkgdown()</code> without the argument;
 however, here we are providing a customized _pkgdown.yml file. See <a href="https://pkgdown.r-lib.org/articles/customise.html">this
 <code>pkgdown</code> vignette</a> for how to customize your site. Here
 is the contents of the <code>_pkgdown.yml</code> that was used:</p>
 <pre class="r"><code>cat(readLines(&quot;../source-files/_pkgdown.yml&quot;), sep = &#39;\n&#39;)</code></pre>
-<pre><code>destination: ../docs/
-
-url: ~
-template:
-  bootstrap: 5
-
-navbar:
-  structure:
-    left:  [reference, articles, search]
-    right: [github]</code></pre>
+<pre><code>  url: https://gnbltrn.github.io/cFreeze_Package/
+  template:
+    bootstrap: 5</code></pre>
 <p>After this step, you can locally see the site by opening
 <code>docs/index.html</code> in the browser. You can then copy the
 <code>docs</code> directory to your website’s server and you’re

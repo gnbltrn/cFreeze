@@ -12,7 +12,6 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/gnbltrn/cFreeze/tree/main/cFreeze,
-    https://gnbltrn.github.io/cFreeze/
+URL: https://github.com/gnbltrn/cFreeze/tree/main/cFreeze
 LitrVersionUsed: 0.8.0
-LitrId: bdaf55edd2a65976c70c06eadb8e05b7
+LitrId: f88646b9fd1c9fe64fdeb3879accb276
