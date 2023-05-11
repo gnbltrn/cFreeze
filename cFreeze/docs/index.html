@@ -71,11 +71,20 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level2">
-<h2 id="cfreeze-">cFreeze <img src="reference/figures/logo.png" align="right" height="139"><a class="anchor" aria-label="anchor" href="#cfreeze-"></a>
+<h2 id="cfreeze-">cFreeze <img src="logo.png" align="right" width="100" height="100"><a class="anchor" aria-label="anchor" href="#cfreeze-"></a>
 </h2>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The purpose of cFreeze is to help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM) closest to that location. cFreeze also calculates the last day to harvest given certain levels of freeze risk after the summer months in the northern hemisphere (NH). See demonstration of functionality below for more details.</p>
+</div>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>The purpose of cFreeze is to help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM) closest to that location. cFreeze also calculates the last day to harvest given certain levels of freeze risk after the summer months in the northern hemisphere (NH).</p>
+</div>
+<div class="section level2">
+<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h2>
+<p>All weather data used by this package is extracted directly from IEM using the apsimx package. cFreeze uses the minimum temperature (mint) reported by IEM. No data is stored or kept by the cFreeze package.</p>
 <p>To learn more about IEM, follow this link: <a href="https://mesonet.agron.iastate.edu/" class="external-link uri">https://mesonet.agron.iastate.edu/</a></p>
 </div>
 <div class="section level2">
@@ -105,23 +114,11 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Returns the last day to harvest (after June, NH) with no historical risk of freezing.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nofreeze</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Sep-17"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Returns the last day to harvest (after June, NH) with less than 10pct historical risk of freezing.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze10</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Oct-2"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Returns the last day to harvest (after June, NH) with less than 20pct historical risk of freezing.</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze20</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Oct-9"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Returns the percent historical risk of freezing for a any day of the year. </span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>, <span class="dv">10</span>, <span class="dv">30</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">43.33333</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the percent each day of the year had temperatures below 0C.</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plotdaysB0</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>) </span></code></pre></div>
-<p><img src="reference/figures/plotB0.png"></p>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Sep-17"</span></span></code></pre></div>
+<p>For detailed information on each of the 5 cFreeze functions, consult the Reference section of the Freeze website, or follow this link:</p>
+<p><a href="https://gnbltrn.github.io/cFreeze_Package/reference/index.html" class="uri">https://gnbltrn.github.io/cFreeze_Package/reference/index.html</a></p>
+<p>For additional examples on how to use cFreeze, please check the article “Using cFreeze Package” in the Articles section of Freeze website, or follow this link:</p>
+<p><a href="https://gnbltrn.github.io/cFreeze_Package/articles/using-package.html" class="uri">https://gnbltrn.github.io/cFreeze_Package/articles/using-package.html</a></p>
 </div>
 
   </main><aside class="col-md-3"><div class="links">

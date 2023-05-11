@@ -84,27 +84,64 @@
 
     
     
-<p>This vignette describes how to use cFreeze package. You start by
+<p>This vignette describes how to use the cFreeze package. You start by
 loading the package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gnbltrn/cFreeze/tree/main/cFreeze" class="external-link">cFreeze</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
+</h2>
+<p>All together, the cFreeze package fuctions allow seed growers to plan
+mid and long term for harvest time with a better understanding of the
+associated historical risk of freezing events. At this time, the cFeeze
+package is recommended for use in the northern hemisphere (NH) only.</p>
+<p>Once cFreeze is installed and loaded, you can use any of its 5
+functions independently:</p>
 <div class="section level3">
-<h3 id="saying-hello">Saying hello<a class="anchor" aria-label="anchor" href="#saying-hello"></a>
+<h3 id="nofreeze">nofreeze<a class="anchor" aria-label="anchor" href="#nofreeze"></a>
 </h3>
-<p>To say hello, you use the <code>say_hello()</code> function:</p>
-<p>For example, to say hello to someone named Jacob, you’d do the
-following:</p>
+<p>Returns the last day to harvest (after June, NH) with no historical
+risk of freezing.</p>
+<p>The usage format is: nofreeze(lon, lat)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nofreeze</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Sep-17"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="saying-hi">Saying hi<a class="anchor" aria-label="anchor" href="#saying-hi"></a>
+<h3 id="freeze10">freeze10<a class="anchor" aria-label="anchor" href="#freeze10"></a>
 </h3>
-<p>To say hi to someone, one would use the following:</p>
+<p>Returns the last day to harvest (after June, NH) with less than 10pct
+historical risk of freezing.</p>
+<p>The usage format is: freeze10(lon, lat)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze10</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Oct-2"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="more-advanced-use">More advanced use<a class="anchor" aria-label="anchor" href="#more-advanced-use"></a>
+<h3 id="freeze20">freeze20<a class="anchor" aria-label="anchor" href="#freeze20"></a>
 </h3>
-<p>You can control the punctuation by using the <code>exclamation</code>
-argument:</p>
+<p>Returns the last day to harvest (after June, NH) with less than 20pct
+historical risk of freezing.</p>
+<p>The usage format is: freeze20(lon, lat)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze20</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Oct-9"</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="freeze">freeze<a class="anchor" aria-label="anchor" href="#freeze"></a>
+</h3>
+<p>Returns the percent historical risk of freezing for a any day of the
+year.</p>
+<p>The usage format is: freeze(lon, lat, Month, Mday)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze</span>(<span class="sc">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span>, <span class="dv">10</span>, <span class="dv">30</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">43.33333</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plotdaysb0">plotdaysB0<a class="anchor" aria-label="anchor" href="#plotdaysb0"></a>
+</h3>
+<p>Plots the percent each day of the year had temperatures below 0C.</p>
+<p>The usage format is: plotdaysB0(lon, lat)</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotdaysB0.html">plotdaysB0</a></span><span class="op">(</span><span class="op">-</span><span class="fl">118.607994</span>, <span class="fl">41.659626</span><span class="op">)</span> </span></code></pre></div>
+<p><img src="plotB0.png" align="center" width="600" height="400"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

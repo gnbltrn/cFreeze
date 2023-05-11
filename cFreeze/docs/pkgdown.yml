@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   using-package: using-package.html
-last_built: 2023-05-11T06:24Z
+last_built: 2023-05-11T11:05Z
 urls:
   reference: https://gnbltrn.github.io/cFreeze_Package/reference
   article: https://gnbltrn.github.io/cFreeze_Package/articles
