@@ -14,15 +14,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-## cFreeze  <img src="man/figures/logo.png" align="right" height="139" />
+## cFreeze  <img src="logo.png" align="right" width="100" height="100" />
 
 <!-- badges: start -->
 <!-- badges: end --> 
 
-The purpose of cFreeze is to help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM) closest to that location.  cFreeze also calculates the last day to harvest given certain levels of freeze risk after the summer months in the northern hemisphere (NH).  See demonstration of functionality below for more details.   
+
+## Introduction
+
+The purpose of cFreeze is to help corn seed growers understand the potential risk of freeze damage at harvest time. cFreeze calculates the percent occurrence of temperatures below zero degrees Celsius for any day of the year, given the GPS coordinates for a location of interest and the last 30-year historical weather data extracted from Iowa Environmental Mesonet (IEM) closest to that location.  cFreeze also calculates the last day to harvest given certain levels of freeze risk after the summer months in the northern hemisphere (NH).  
+
+
+## Data
+
+All weather data used by this package is extracted directly from IEM using the apsimx package.  cFreeze uses the minimum temperature (mint) reported by IEM.  No data is stored or kept by the cFreeze package.
 
 To learn more about IEM, follow this link:
 https://mesonet.agron.iastate.edu/
+
 
 ## Requirements
 
@@ -46,6 +55,7 @@ devtools::install.github("gnbltrn/cFreeze/cFreeze")
 library(cFreeze)
 ```
 
+
 ## Basic Demonstration of Funtionality
 
 Once cFreeze is installed and loaded, you can use any of its 5 functions independently:
@@ -55,20 +65,16 @@ Once cFreeze is installed and loaded, you can use any of its 5 functions indepen
 #Returns the last day to harvest (after June, NH) with no historical risk of freezing.
 nofreeze(-118.607994, 41.659626)
 [1] "Sep-17"
-
-#Returns the last day to harvest (after June, NH) with less than 10pct historical risk of freezing.
-freeze10(-118.607994, 41.659626)
-[1] "Oct-2"
-
-#Returns the last day to harvest (after June, NH) with less than 20pct historical risk of freezing.
-freeze20(-118.607994, 41.659626)
-[1] "Oct-9"
-
-#Returns the percent historical risk of freezing for a any day of the year. 
-freeze(-118.607994, 41.659626, 10, 30)
-[1] 43.33333
-
-#Plots the percent each day of the year had temperatures below 0C.
-plotdaysB0(-118.607994, 41.659626) 
 ```
-![](man/figures/plotB0.png)
+
+For detailed information on each of the 5 cFreeze functions, consult the Reference section of the Freeze website, or follow this link: 
+
+https://gnbltrn.github.io/cFreeze_Package/reference/index.html
+
+For additional examples on how to use cFreeze, please check the article "Using cFreeze Package" in the Articles section of Freeze website, or follow this link:
+
+https://gnbltrn.github.io/cFreeze_Package/articles/using-package.html
+
+
+
+
