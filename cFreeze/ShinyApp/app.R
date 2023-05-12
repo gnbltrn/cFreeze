@@ -1,28 +1,27 @@
 library(shiny)
-library(cFreeze)
 library(ggplot2)
 library(apsimx)
 library(tidyverse)
 
 ui <- fluidPage(
-  titlePanel("cFreeze Package Demo"),
+titlePanel("cFreeze Package Demo"),
+    numericInput("lon", label = h3("Longitude"), value = -118.000),
+    numericInput("lat", label = h3("Latitude"), value = 43.000),
+    submitButton("Submit"),
   
-  numericInput("lon", label = h3("Longitude"), value = -118.000),
-  numericInput("lat", label = h3("Latitude"), value = 43.000),
-
-  submitButton("Submit"),
-  
- plotOutput(outputId = "value", height = "100") 
+plotOutput(outputId = "value", height = "400") 
 )
 
 server <- function(input, output) {
   
-  #create reactive value
+  #create data frames
   cFreezedata <- data.frame()
   pctcal <- data.frame()
   pctdf <- data.frame()
   pctdfmd <- data.frame()
   pctdfmdmd <- data.frame()
+  pct <- NULL
+  date <- NULL
   
   observeEvent(input$submit_button, {
     
@@ -50,13 +49,11 @@ server <- function(input, output) {
       mutate(monthabb = month.abb[pctdfmd$month]) %>%
       unite(monthday, monthabb, mday, remove = FALSE, sep = "-") %>%
       filter(day != 366)
-    
   })
     output$value <- renderPlot({ 
-      ggplot(pctdfmdmd)+
-        geom_line(aes(x = date, y = pct)) +
-        scale_x_date(date_labels = "%b-%d", 
-                     date_breaks = "2 month") })
+      ggplot(pctdfmdmd) +
+        geom_line(aes(x = date, y = pct)) 
+      })
 }
 
 shinyApp(ui, server)
