@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## cFreeze <img src="logo.png" align="right" width="100" height="100" />
+## cFreeze <img src="docs/logo.png" align="right" width="100" height="100" />
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -15,13 +15,20 @@ day of the year, given the GPS coordinates for a location of interest
 and the last 30-year historical weather data extracted from Iowa
 Environmental Mesonet (IEM) closest to that location. cFreeze also
 calculates the last day to harvest given certain levels of freeze risk
-after the summer months in the northern hemisphere (NH).
+after the summer months (June) in the northern hemisphere (NH).
+
+To learn more about cFreeze, check the cFreeze webpage which includes
+this Readme page, References to each of the functions, and and article
+on how to use it.
+
+<https://gnbltrn.github.io/cFreeze_Package/index.html>
 
 ## Data
 
 All weather data used by this package is extracted directly from IEM
 using the apsimx package. cFreeze uses the minimum temperature (mint)
-reported by IEM. No data is stored or kept by the cFreeze package.
+reported by IEM the percentage of days with temperature below 0C or
+freezing. No data is stored or kept by the cFreeze package.
 
 To learn more about IEM, follow this link:
 <https://mesonet.agron.iastate.edu/>
@@ -58,17 +65,13 @@ independently:
 ``` r
 
 #Returns the last day to harvest (after June, NH) with no historical risk of freezing.
+
+#Usage
+nofreeze (lon, lat)
+
+#Example
 nofreeze(-118.607994, 41.659626)
+
+#Outcome
 [1] "Sep-17"
 ```
-
-For detailed information on each of the 5 cFreeze functions, consult the
-Reference section of the Freeze website, or follow this link:
-
-<https://gnbltrn.github.io/cFreeze_Package/reference/index.html>
-
-For additional examples on how to use cFreeze, please check the article
-“Using cFreeze Package” in the Articles section of Freeze website, or
-follow this link:
-
-<https://gnbltrn.github.io/cFreeze_Package/articles/using-package.html>
