@@ -9,7 +9,7 @@ ui <- fluidPage(
   numericInput("lat", label = h3("Latitude"), value = 43.000),
   submitButton("Submit"),
   
-  plotOutput(outputId = "value", height = "400") 
+  plotOutput(outputId = "plot", height = "400") 
 )
 
 server <- function(input, output) {
@@ -50,7 +50,7 @@ server <- function(input, output) {
       unite(monthday, monthabb, mday, remove = FALSE, sep = "-") %>%
       filter(day != 366)
   })
-  output$value <- renderPlot({ 
+  output$plot <- renderPlot({ 
     ggplot(pctdfmdmd) +
       geom_line(aes(x = date, y = pct)) 
   })
