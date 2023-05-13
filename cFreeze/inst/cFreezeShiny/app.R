@@ -1,51 +1,62 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
+library(ggplot2)
+library(apsimx)
+library(tidyverse)
 
-# Define UI for application that draws a histogram
+
 ui <- fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
-        )
-    )
+  titlePanel("cFreeze Package Demo (it takes a moment to load!)"),
+  sidebarPanel(
+    numericInput("lon", label = h3("Longitude (from -71 to -124)"), value = -118),
+    numericInput("lat", label = h3("Latitude (from 40 to 48"), value = 43),
+    
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot")
+    
+  ),
+  
+  fillPage = TRUE # fill the whole screen with the app
 )
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
+server <- function(input, output, session) {
+  
+  #Render the plot
+  output$plot <- renderPlot({ 
+    
+    
+    #   observeEvent(input$submit_button, {
+    ##Get weather data from IEM
+    cFreezedata <- get_iem_apsim_met(lonlat = c(input$lon, input$lat), 
+                                     dates = c("1993-01-01", "2022-12-31"))
+    
+    ##Calculate percent days with freeze (below 0C)
+    pctcal <- lapply(split(cFreezedata, cFreezedata$day), function(x){
+      data.frame(day = x$day[1], pct = 100 * length(x$mint[x$mint <= 0])/length(x$mint))
     })
+    
+    ##Apply rbind to create a single data frame from the list above
+    pctdf <- do.call(rbind, pctcal)
+    
+    ##Add date, month and mday
+    pctdfmd <- pctdf %>% 
+      mutate(date = doy2date(day)) %>%
+      mutate(month = month(date)) %>%
+      mutate(mday = day(date))
+    
+    ##Add month-day format character
+    pctdfmdmd <- pctdfmd %>%
+      mutate(monthabb = month.abb[pctdfmd$month]) %>%
+      unite(monthday, monthabb, mday, remove = FALSE, sep = "-") %>%
+      filter(day != 366)
+    
+    ggplot(pctdfmdmd)+
+      geom_line(aes(x = date, y = pct)) +
+      scale_x_date(date_labels = "%b-%d", 
+                   date_breaks = "2 month") +
+      labs(title = "Percent days in 30 years with temps below 0C")
+  })
+  #  })
 }
 
-# Run the application 
-shinyApp(ui = ui, server = server)
+shinyApp(ui, server)
