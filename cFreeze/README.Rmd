@@ -62,7 +62,7 @@ library(cFreeze)
 
 ## Basic Demonstration of Funtionality
 
-Once cFreeze is installed and loaded, you can use any of its 5 functions independently:
+Once cFreeze is installed and loaded, you can use any of its 5 functions independently: 
 
 ```{r, eval = FALSE}
 
