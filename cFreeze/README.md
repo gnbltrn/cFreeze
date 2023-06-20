@@ -51,7 +51,7 @@ using the devtools package:
 ``` r
 
 install.packages("devtools")  #if not installed already
-devtools::install.github("gnbltrn/cFreeze/cFreeze")
+devtools::install_github("gnbltrn/cFreeze/cFreeze")
 
 #Load cFreeze
 library(cFreeze)
